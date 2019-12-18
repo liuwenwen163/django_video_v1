@@ -1,0 +1,2 @@
+# django_video_v1
+自己实现一遍基于django的vide项目
