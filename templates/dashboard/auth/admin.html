@@ -1,0 +1,58 @@
+<%inherit file="../base.html"/>
+<%! from django.shortcuts import reverse %>
+
+<%def name="content()">
+    <%
+      prev_page = '{}?page={}'.format(reverse('admin_manager'), page_num - 1)
+      next_page = '{}?page={}'.format(reverse('admin_manager'), page_num + 1)
+    %>
+    <h1>管理员模块</h1>
+    % if page_num>1:
+        &nbsp;&nbsp;<span><a href="${prev_page}">上一页</a></span>&nbsp;&nbsp;
+    % else:
+        &nbsp;&nbsp;<span>上一页</span>&nbsp;&nbsp;
+    % endif
+    % if page_num<total:
+        <a href="${next_page}">下一页</a><br>
+    % else:
+        <span>下一页</span>
+    % endif
+
+    <div class="admin_paginator">
+        ${page_num}<span> | </span>${total}
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>用户名</th>
+            <th>状态</th>
+            <th>创建时间</th>
+            <th>编辑</th>
+        </tr>
+        </thead>
+        <tbody>
+            % for user in users:
+                <tr>
+                    <td>${user.username}</td>
+                    <td>${user.is_superuser}</td>
+                    <td>${user.date_joined}</td>
+                    <td>
+                        <%
+                            _location = reverse('admin_update_status')
+                            user_id = user.id
+##                             todo:思考如何修改状态后返回原来的页面链接？
+                            admin_on = "{}?status=on&id={}".format(_location, user_id)
+                            admin_off = "{}?status=off&id={}".format(_location, user_id)
+                        %>
+                        % if user.is_superuser:
+                            <td><a href="${admin_off}">取消管理员</a></td>
+                        %else:
+                            <td><a href="${admin_on}">设为管理员</a></td>
+                        % endif
+                    </td>
+                </tr>
+            % endfor
+        </tbody>
+    </table>
+</%def>
+
