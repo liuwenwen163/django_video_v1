@@ -1,6 +1,6 @@
 
 var videoEreaStatic = false;
-var videoEditArea = $('#video-edit-area')
+var videoEditArea = $('#video-edit-area');
 
 
 $('#open-add-video-btn').click(function(){

@@ -49,3 +49,15 @@ NationalityType.japan.label = '日本'
 NationalityType.korea.label = '韩国'
 NationalityType.america.label = '美国'
 NationalityType.other.label = '其他'
+
+
+class IdentityType(Enum):
+    to_star = 'to_star'
+    supporting_rule = 'supporting_rule'
+    director = 'director'
+
+
+IdentityType.to_star.label = '主演'
+IdentityType.supporting_rule.label = '配角'
+IdentityType.director.label = '导演'
+
